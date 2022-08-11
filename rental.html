@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./rental.css" />
+    <script src="./mainjs.js"></script>
+
+    <title>Rental</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./index.html">
+          <!-- Logo created on Canva -->
+          <img class="navLogo" src="./images/Logo-black.png" alt="Logo" />
+          Dodgy Brakes Car Rental
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"></a>
+            </li>
+          </ul>
+          <div class="container d-flex justify-content-center">
+            <span id="clock" class="clock"></span>
+          </div>
+          <p class="pe-5 pt-2 text-center">PH: 403.250.2525</p>
+          <form class="d-flex">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <header>
+      <div class="overlay"></div>
+      <!-- Background image -->
+      <div class="outer-div">
+        <img
+          class="header-background"
+          src="./images/header-image.jpg"
+          alt="header-Pic"
+        />
+      </div>
+      <div class="w-100 text-white header-text welcome">
+        <h4>We Are Open 24/7 Ready To Serve You</h4>
+        <h1 class="display-3 welcome pt-3">
+          Find The Rental <br />You Deserve
+        </h1>
+        <h4 class="mt-5">
+          Reserve Your Vehicle Today, Best Rates & Accessories
+        </h4>
+        <button type="button" class="btn btn-danger">
+          Browse Our Vehicles
+        </button>
+      </div>
+    </header>
+
+    <!-- section2 -->
+    <div class="container section2">
+      <h1 class="mt-5 pb-5 text-center">Search Customer Database</h1>
+      <hr />
+      <div class="row">
+        <div class="col-3">
+          <h2 class="mt-3 pb-3 display-6">Customer Information</h2>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lastName"
+              aria-describedby="lastName"
+              onkeyup="searchLastName(this.value)"
+            />
+            <div id="enterLastName" class="form-text">Enter Last Name</div>
+          </div>
+          <div class="mb-3">
+            <label for="first" class="form-label">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="first"
+              aria-describedby="first"
+              onkeyup="searchFirstName(this.value)"
+            />
+            <div id="enterfirst" class="form-text">Enter First Name</div>
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input
+              type="text"
+              class="form-control"
+              id="address"
+              aria-describedby="address"
+              onkeyup="searchAddress(this.value)"
+            />
+            <div id="enterAddress" class="form-text">Enter Address</div>
+          </div>
+          <div class="mb-3">
+            <label for="state" class="form-label">State/Prov</label>
+            <input
+              type="text"
+              class="form-control"
+              id="state"
+              aria-describedby="state"
+              onkeyup="searchState(this.value)"
+            />
+            <div id="enterstate" class="form-text">Enter State/Prov</div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="text"
+              class="form-control"
+              id="email"
+              aria-describedby="email"
+              onkeyup="searchEmail(this.value)"
+            />
+            <div id="enteremail" class="form-text">Enter Email</div>
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input
+              type="text"
+              class="form-control"
+              id="phone"
+              aria-describedby="phone"
+              onkeyup="searchPhone(this.value)"
+            />
+            <div id="enterphone" class="form-text">Enter Phone</div>
+          </div>
+          <button
+            id="reserButton"
+            type="button"
+            class="btn btn-warning"
+            disabled
+            onclick="displayVehicles()"
+          >
+            New Reservation
+          </button>
+        </div>
+
+        <!-- Second Column -->
+        <div class="col results">
+          <h2 id="searchvalue" class="pb-4 display-6"></h2>
+          <table
+            class="table table-striped table-hover pb-5"
+            id="searchresults"
+          ></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3 Rental Car Form -->
+    <div id="rentalForm" class="container hide">
+      <!-- Compact Vehicle Card -->
+      <div class="row">
+        <div class="card mb-3">
+          <div class="row">
+            <div class="col-md-4 p-0">
+              <div class="car-cards">Compact</div>
+              <img
+                src="./images/compact.jpg"
+                class="img-fluid rounded-start"
+                style="height: 93%; object-fit: cover"
+                alt="compact"
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title fw-bold">
+                  Ford Fiesta or Similar <span class="blue-font">$15.00</span> /
+                  Daily
+                </h5>
+                <p class="card-text">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa
+                  ullam aut dolore, est et officiis sit? Nisi magnam aut,
+                  distinctio, molestiae odit incidunt assumenda eveniet
+                  architecto eos eum facere ducimus eaque sequi? Velit quibusdam
+                  necessitatibus iusto. Numquam, incidunt. Inventore ex repellat
+                  excepturi accusantium ullam repudiandae dolore eos quae hic
+                  libero!
+                </p>
+                <div class="row">
+                  <div class="col-6">
+                    <h6>----- Read More</h6>
+                  </div>
+                  <div class="col-6">
+                    <h6>*** Options Available</h6>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-3">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        fill="currentColor"
+                        class="bi bi-person-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+                        />
+                      </svg>
+                      5 Passenger
+                    </div>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        fill="currentColor"
+                        class="bi bi-briefcase-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5z"
+                        />
+                        <path
+                          d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85v5.65z"
+                        />
+                      </svg>
+                      2 Small Bags
+                    </div>
+                  </div>
+
+                  <div class="col-3">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        fill="currentColor"
+                        class="bi bi-thermometer-snow pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M5 12.5a1.5 1.5 0 1 1-2-1.415V9.5a.5.5 0 0 1 1 0v1.585A1.5 1.5 0 0 1 5 12.5z"
+                        />
+                        <path
+                          d="M1 2.5a2.5 2.5 0 0 1 5 0v7.55a3.5 3.5 0 1 1-5 0V2.5zM3.5 1A1.5 1.5 0 0 0 2 2.5v7.987l-.167.15a2.5 2.5 0 1 0 3.333 0L5 10.486V2.5A1.5 1.5 0 0 0 3.5 1zm5 1a.5.5 0 0 1 .5.5v1.293l.646-.647a.5.5 0 0 1 .708.708L9 5.207v1.927l1.669-.963.495-1.85a.5.5 0 1 1 .966.26l-.237.882 1.12-.646a.5.5 0 0 1 .5.866l-1.12.646.884.237a.5.5 0 1 1-.26.966l-1.848-.495L9.5 8l1.669.963 1.849-.495a.5.5 0 1 1 .258.966l-.883.237 1.12.646a.5.5 0 0 1-.5.866l-1.12-.646.237.883a.5.5 0 1 1-.966.258L10.67 9.83 9 8.866v1.927l1.354 1.353a.5.5 0 0 1-.708.708L9 12.207V13.5a.5.5 0 0 1-1 0v-11a.5.5 0 0 1 .5-.5z"
+                        />
+                      </svg>
+                      Air Condition
+                    </div>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        fill="currentColor"
+                        class="bi bi-diagram-3-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zm-6 8A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm6 0A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm6 0a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1z"
+                        />
+                      </svg>
+                      Automatic
+                    </div>
+                  </div>
+
+                  <div class="col-3 mt-2">
+                    <div class="form-check">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="35"
+                        height="35"
+                        fill="currentColor"
+                        class="bi bi-hdd-rack-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M2 2a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h1v2H2a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-1V7h1a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm.5 3a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm2 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm-2 7a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm2 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zM12 7v2H4V7h8z"
+                        />
+                      </svg>
+                      <input
+                        class="form-check-input mt-2 big-checkbox"
+                        type="checkbox"
+                        value="5"
+                        id="roofRack1"
+                      />
+                      <label class="form-check-label" for="roofRack1">
+                        RoofRack <strong>$5/day</strong>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="35"
+                        height="35"
+                        fill="currentColor"
+                        class="bi bi-bicycle pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M4 4.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1v.5h4.14l.386-1.158A.5.5 0 0 1 11 4h1a.5.5 0 0 1 0 1h-.64l-.311.935.807 1.29a3 3 0 1 1-.848.53l-.508-.812-2.076 3.322A.5.5 0 0 1 8 10.5H5.959a3 3 0 1 1-1.815-3.274L5 5.856V5h-.5a.5.5 0 0 1-.5-.5zm1.5 2.443-.508.814c.5.444.85 1.054.967 1.743h1.139L5.5 6.943zM8 9.057 9.598 6.5H6.402L8 9.057zM4.937 9.5a1.997 1.997 0 0 0-.487-.877l-.548.877h1.035zM3.603 8.092A2 2 0 1 0 4.937 10.5H3a.5.5 0 0 1-.424-.765l1.027-1.643zm7.947.53a2 2 0 1 0 .848-.53l1.026 1.643a.5.5 0 1 1-.848.53L11.55 8.623z"
+                        />
+                      </svg>
+                      <input
+                        class="form-check-input mt-2 big-checkbox"
+                        type="checkbox"
+                        value="5"
+                        id="bikeRack1"
+                      />
+                      <label class="form-check-label" for="bikeRack1">
+                        Bike Rack <strong>$5/day</strong>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col-3 mt-2">
+                    <div class="form-check">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="35"
+                        height="35"
+                        fill="currentColor"
+                        class="bi bi-geo-alt-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"
+                        />
+                      </svg>
+                      <input
+                        class="form-check-input mt-2 big-checkbox"
+                        type="checkbox"
+                        value="10"
+                        id="gps1"
+                      />
+                      <label class="form-check-label" for="gps1">
+                        GPS <strong>$10 flat</strong>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="35"
+                        height="35"
+                        fill="currentColor"
+                        class="bi bi-life-preserver pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm6.43-5.228a7.025 7.025 0 0 1-3.658 3.658l-1.115-2.788a4.015 4.015 0 0 0 1.985-1.985l2.788 1.115zM5.228 14.43a7.025 7.025 0 0 1-3.658-3.658l2.788-1.115a4.015 4.015 0 0 0 1.985 1.985L5.228 14.43zm9.202-9.202-2.788 1.115a4.015 4.015 0 0 0-1.985-1.985l1.115-2.788a7.025 7.025 0 0 1 3.658 3.658zm-8.087-.87a4.015 4.015 0 0 0-1.985 1.985L1.57 5.228A7.025 7.025 0 0 1 5.228 1.57l1.115 2.788zM8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"
+                        />
+                      </svg>
+                      <input
+                        class="form-check-input mt-2 big-checkbox"
+                        type="checkbox"
+                        value=""
+                        id="child1"
+                      />
+                      <label class="form-check-label" for="child1">
+                        Child Seat <strong>Free</strong>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row align-items-end">
+                  <div>
+                    <h6>Rental Dates</h6>
+                  </div>
+                  <div class="col-4">
+                    <div class="mb-3">
+                      <label for="date" class="form-label">Arrive Date</label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="arriveDate1"
+                        aria-describedby="date"
+                        onchange="setDepartDate(this.value, 1)"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="mb-3">
+                      <label for="date" class="form-label"
+                        >Departure Date</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="departDate1"
+                        aria-describedby="date"
+                        onchange="activateButton(1)"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <button
+                      id="reserveButton1"
+                      type="button"
+                      class="btn btn-danger float-end"
+                      data-bs-toggle="modal"
+                      data-bs-target="#confirmationModal"
+                      onclick="reserve(1)"
+                      disabled
+                    >
+                      Reserve Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mid-Size Vehicle Card -->
+      <div class="row">
+        <div class="card mb-3">
+          <div class="row">
+            <div class="col-md-4 p-0">
+              <div class="car-cards">Mid-Size</div>
+              <img
+                src="./images/mid-size.jpg"
+                class="img-fluid rounded-start"
+                style="height: 93%; object-fit: cover"
+                alt="compact"
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title fw-bold">
+                  Nissan Maxima or Similar
+                  <span class="blue-font">$20.00</span> / Daily
+                </h5>
+                <p class="card-text">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa
+                  ullam aut dolore, est et officiis sit? Nisi magnam aut,
+                  distinctio, molestiae odit incidunt assumenda eveniet
+                  architecto eos eum facere ducimus eaque sequi? Velit quibusdam
+                  necessitatibus iusto. Numquam, incidunt. Inventore ex repellat
+                  excepturi accusantium ullam repudiandae dolore eos quae hic
+                  libero!
+                </p>
+                <div class="row">
+                  <div class="col-6">
+                    <h6>----- Read More</h6>
+                  </div>
+                  <div class="col-6">
+                    <h6>*** Options Available</h6>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-3">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        fill="currentColor"
+                        class="bi bi-person-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+                        />
+                      </svg>
+                      5 Passenger
+                    </div>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        fill="currentColor"
+                        class="bi bi-briefcase-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5z"
+                        />
+                        <path
+                          d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85v5.65z"
+                        />
+                      </svg>
+                      2 Small Bags
+                    </div>
+                  </div>
+
+                  <div class="col-3">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        fill="currentColor"
+                        class="bi bi-thermometer-snow pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M5 12.5a1.5 1.5 0 1 1-2-1.415V9.5a.5.5 0 0 1 1 0v1.585A1.5 1.5 0 0 1 5 12.5z"
+                        />
+                        <path
+                          d="M1 2.5a2.5 2.5 0 0 1 5 0v7.55a3.5 3.5 0 1 1-5 0V2.5zM3.5 1A1.5 1.5 0 0 0 2 2.5v7.987l-.167.15a2.5 2.5 0 1 0 3.333 0L5 10.486V2.5A1.5 1.5 0 0 0 3.5 1zm5 1a.5.5 0 0 1 .5.5v1.293l.646-.647a.5.5 0 0 1 .708.708L9 5.207v1.927l1.669-.963.495-1.85a.5.5 0 1 1 .966.26l-.237.882 1.12-.646a.5.5 0 0 1 .5.866l-1.12.646.884.237a.5.5 0 1 1-.26.966l-1.848-.495L9.5 8l1.669.963 1.849-.495a.5.5 0 1 1 .258.966l-.883.237 1.12.646a.5.5 0 0 1-.5.866l-1.12-.646.237.883a.5.5 0 1 1-.966.258L10.67 9.83 9 8.866v1.927l1.354 1.353a.5.5 0 0 1-.708.708L9 12.207V13.5a.5.5 0 0 1-1 0v-11a.5.5 0 0 1 .5-.5z"
+                        />
+                      </svg>
+                      Air Condition
+                    </div>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        fill="currentColor"
+                        class="bi bi-diagram-3-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zm-6 8A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm6 0A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm6 0a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1z"
+                        />
+                      </svg>
+                      Automatic
+                    </div>
+                  </div>
+
+                  <div class="col-3 mt-2">
+                    <div class="form-check">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="35"
+                        height="35"
+                        fill="currentColor"
+                        class="bi bi-hdd-rack-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M2 2a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h1v2H2a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-1V7h1a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm.5 3a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm2 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm-2 7a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm2 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zM12 7v2H4V7h8z"
+                        />
+                      </svg>
+                      <input
+                        class="form-check-input mt-2 big-checkbox"
+                        type="checkbox"
+                        value="5"
+                        id="roofRack2"
+                      />
+                      <label class="form-check-label" for="roofRack2">
+                        RoofRack <strong>$5/day</strong>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="35"
+                        height="35"
+                        fill="currentColor"
+                        class="bi bi-bicycle pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M4 4.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1v.5h4.14l.386-1.158A.5.5 0 0 1 11 4h1a.5.5 0 0 1 0 1h-.64l-.311.935.807 1.29a3 3 0 1 1-.848.53l-.508-.812-2.076 3.322A.5.5 0 0 1 8 10.5H5.959a3 3 0 1 1-1.815-3.274L5 5.856V5h-.5a.5.5 0 0 1-.5-.5zm1.5 2.443-.508.814c.5.444.85 1.054.967 1.743h1.139L5.5 6.943zM8 9.057 9.598 6.5H6.402L8 9.057zM4.937 9.5a1.997 1.997 0 0 0-.487-.877l-.548.877h1.035zM3.603 8.092A2 2 0 1 0 4.937 10.5H3a.5.5 0 0 1-.424-.765l1.027-1.643zm7.947.53a2 2 0 1 0 .848-.53l1.026 1.643a.5.5 0 1 1-.848.53L11.55 8.623z"
+                        />
+                      </svg>
+                      <input
+                        class="form-check-input mt-2 big-checkbox"
+                        type="checkbox"
+                        value="5"
+                        id="bikeRack2"
+                      />
+                      <label class="form-check-label" for="bikeRack2">
+                        Bike Rack <strong>$5/day</strong>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col-3">
+                    <div class="form-check">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="35"
+                        height="35"
+                        fill="currentColor"
+                        class="bi bi-geo-alt-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"
+                        />
+                      </svg>
+                      <input
+                        class="form-check-input mt-2 big-checkbox"
+                        type="checkbox"
+                        value="10"
+                        id="gps2"
+                      />
+                      <label class="form-check-label" for="gps2">
+                        GPS <strong>$10 flat</strong>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="35"
+                        height="35"
+                        fill="currentColor"
+                        class="bi bi-life-preserver pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm6.43-5.228a7.025 7.025 0 0 1-3.658 3.658l-1.115-2.788a4.015 4.015 0 0 0 1.985-1.985l2.788 1.115zM5.228 14.43a7.025 7.025 0 0 1-3.658-3.658l2.788-1.115a4.015 4.015 0 0 0 1.985 1.985L5.228 14.43zm9.202-9.202-2.788 1.115a4.015 4.015 0 0 0-1.985-1.985l1.115-2.788a7.025 7.025 0 0 1 3.658 3.658zm-8.087-.87a4.015 4.015 0 0 0-1.985 1.985L1.57 5.228A7.025 7.025 0 0 1 5.228 1.57l1.115 2.788zM8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"
+                        />
+                      </svg>
+                      <input
+                        class="form-check-input mt-2 big-checkbox"
+                        type="checkbox"
+                        value=""
+                        id="child2"
+                      />
+                      <label class="form-check-label" for="child2">
+                        Child Seat <strong>Free</strong>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row align-items-end">
+                  <div>
+                    <h6>Rental Dates</h6>
+                  </div>
+                  <div class="col-4">
+                    <div class="mb-3">
+                      <label for="date" class="form-label">Arrive Date</label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="arriveDate2"
+                        aria-describedby="date"
+                        onchange="setDepartDate(this.value, 2)"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="mb-3">
+                      <label for="date" class="form-label"
+                        >Departure Date</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="departDate2"
+                        aria-describedby="date"
+                        onchange="activateButton(2)"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <button
+                      id="reserveButton2"
+                      type="button"
+                      class="btn btn-danger float-end"
+                      data-bs-toggle="modal"
+                      data-bs-target="#confirmationModal"
+                      onclick="reserve(2)"
+                      disabled
+                    >
+                      Reserve Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Luxury Vehicle Card -->
+      <div class="row">
+        <div class="card mb-3">
+          <div class="row">
+            <div class="col-md-4 p-0">
+              <div class="car-cards">Luxury</div>
+              <img
+                src="./images/luxury.jpg"
+                class="img-fluid rounded-start"
+                style="height: 93%; object-fit: cover"
+                alt="compact"
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title fw-bold">
+                  Porsche 911 or Similar <span class="blue-font">$35.00</span> /
+                  Daily
+                </h5>
+                <p class="card-text">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa
+                  ullam aut dolore, est et officiis sit? Nisi magnam aut,
+                  distinctio, molestiae odit incidunt assumenda eveniet
+                  architecto eos eum facere ducimus eaque sequi? Velit quibusdam
+                  necessitatibus iusto. Numquam, incidunt. Inventore ex repellat
+                  excepturi accusantium ullam repudiandae dolore eos quae hic
+                  libero!
+                </p>
+                <div class="row">
+                  <div class="col-6">
+                    <h6>----- Read More</h6>
+                  </div>
+                  <div class="col-6">
+                    <h6>*** Options Available</h6>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-3">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        fill="currentColor"
+                        class="bi bi-person-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+                        />
+                      </svg>
+                      5 Passenger
+                    </div>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        fill="currentColor"
+                        class="bi bi-briefcase-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5z"
+                        />
+                        <path
+                          d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85v5.65z"
+                        />
+                      </svg>
+                      2 Small Bags
+                    </div>
+                  </div>
+
+                  <div class="col-3">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        fill="currentColor"
+                        class="bi bi-thermometer-snow pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M5 12.5a1.5 1.5 0 1 1-2-1.415V9.5a.5.5 0 0 1 1 0v1.585A1.5 1.5 0 0 1 5 12.5z"
+                        />
+                        <path
+                          d="M1 2.5a2.5 2.5 0 0 1 5 0v7.55a3.5 3.5 0 1 1-5 0V2.5zM3.5 1A1.5 1.5 0 0 0 2 2.5v7.987l-.167.15a2.5 2.5 0 1 0 3.333 0L5 10.486V2.5A1.5 1.5 0 0 0 3.5 1zm5 1a.5.5 0 0 1 .5.5v1.293l.646-.647a.5.5 0 0 1 .708.708L9 5.207v1.927l1.669-.963.495-1.85a.5.5 0 1 1 .966.26l-.237.882 1.12-.646a.5.5 0 0 1 .5.866l-1.12.646.884.237a.5.5 0 1 1-.26.966l-1.848-.495L9.5 8l1.669.963 1.849-.495a.5.5 0 1 1 .258.966l-.883.237 1.12.646a.5.5 0 0 1-.5.866l-1.12-.646.237.883a.5.5 0 1 1-.966.258L10.67 9.83 9 8.866v1.927l1.354 1.353a.5.5 0 0 1-.708.708L9 12.207V13.5a.5.5 0 0 1-1 0v-11a.5.5 0 0 1 .5-.5z"
+                        />
+                      </svg>
+                      Air Condition
+                    </div>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        fill="currentColor"
+                        class="bi bi-diagram-3-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zm-6 8A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm6 0A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm6 0a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1z"
+                        />
+                      </svg>
+                      Automatic
+                    </div>
+                  </div>
+
+                  <div class="col-3 mt-2">
+                    <div class="form-check">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="35"
+                        height="35"
+                        fill="currentColor"
+                        class="bi bi-hdd-rack-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M2 2a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h1v2H2a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-1V7h1a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm.5 3a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm2 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm-2 7a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm2 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zM12 7v2H4V7h8z"
+                        />
+                      </svg>
+                      <input
+                        class="form-check-input mt-2 big-checkbox"
+                        type="checkbox"
+                        value="5"
+                        id="roofRack3"
+                      />
+                      <label class="form-check-label" for="roofRack3">
+                        RoofRack <strong>$5/day</strong>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="35"
+                        height="35"
+                        fill="currentColor"
+                        class="bi bi-bicycle pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M4 4.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1v.5h4.14l.386-1.158A.5.5 0 0 1 11 4h1a.5.5 0 0 1 0 1h-.64l-.311.935.807 1.29a3 3 0 1 1-.848.53l-.508-.812-2.076 3.322A.5.5 0 0 1 8 10.5H5.959a3 3 0 1 1-1.815-3.274L5 5.856V5h-.5a.5.5 0 0 1-.5-.5zm1.5 2.443-.508.814c.5.444.85 1.054.967 1.743h1.139L5.5 6.943zM8 9.057 9.598 6.5H6.402L8 9.057zM4.937 9.5a1.997 1.997 0 0 0-.487-.877l-.548.877h1.035zM3.603 8.092A2 2 0 1 0 4.937 10.5H3a.5.5 0 0 1-.424-.765l1.027-1.643zm7.947.53a2 2 0 1 0 .848-.53l1.026 1.643a.5.5 0 1 1-.848.53L11.55 8.623z"
+                        />
+                      </svg>
+                      <input
+                        class="form-check-input mt-2 big-checkbox"
+                        type="checkbox"
+                        value=""
+                        id="bikeRack3"
+                      />
+                      <label class="form-check-label" for="bikeRack3">
+                        Bike Rack <strong>$5/day</strong>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col-3">
+                    <div class="form-check">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="35"
+                        height="35"
+                        fill="currentColor"
+                        class="bi bi-geo-alt-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"
+                        />
+                      </svg>
+                      <input
+                        class="form-check-input mt-2 big-checkbox"
+                        type="checkbox"
+                        value="10"
+                        id="gps3"
+                      />
+                      <label class="form-check-label" for="gps3">
+                        GPS <strong>$10 flat</strong>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="35"
+                        height="35"
+                        fill="currentColor"
+                        class="bi bi-life-preserver pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm6.43-5.228a7.025 7.025 0 0 1-3.658 3.658l-1.115-2.788a4.015 4.015 0 0 0 1.985-1.985l2.788 1.115zM5.228 14.43a7.025 7.025 0 0 1-3.658-3.658l2.788-1.115a4.015 4.015 0 0 0 1.985 1.985L5.228 14.43zm9.202-9.202-2.788 1.115a4.015 4.015 0 0 0-1.985-1.985l1.115-2.788a7.025 7.025 0 0 1 3.658 3.658zm-8.087-.87a4.015 4.015 0 0 0-1.985 1.985L1.57 5.228A7.025 7.025 0 0 1 5.228 1.57l1.115 2.788zM8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"
+                        />
+                      </svg>
+                      <input
+                        class="form-check-input mt-2 big-checkbox"
+                        type="checkbox"
+                        value=""
+                        id="child3"
+                      />
+                      <label class="form-check-label" for="child3">
+                        Child Seat <strong>Free</strong>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row align-items-end">
+                  <div>
+                    <h6>Rental Dates</h6>
+                  </div>
+                  <div class="col-4">
+                    <div class="mb-3">
+                      <label for="date" class="form-label">Arrive Date</label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="arriveDate3"
+                        aria-describedby="date"
+                        onchange="setDepartDate(this.value, 3)"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="mb-3">
+                      <label for="date" class="form-label"
+                        >Departure Date</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="departDate3"
+                        aria-describedby="date"
+                        onchange="activateButton(3)"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <button
+                      id="reserveButton3"
+                      type="button"
+                      class="btn btn-danger float-end"
+                      data-bs-toggle="modal"
+                      data-bs-target="#confirmationModal"
+                      onclick="reserve(3)"
+                      disabled
+                    >
+                      Reserve Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Truck/Van Vehicle Card -->
+      <div class="row">
+        <div class="card mb-3">
+          <div class="row">
+            <div class="col-md-4 p-0">
+              <div class="car-cards">Truck/Van</div>
+              <img
+                src="./images/truck.jpg"
+                class="img-fluid rounded-start"
+                style="height: 93%; object-fit: cover"
+                alt="compact"
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title fw-bold">
+                  Ford F-150 or Similar <span class="blue-font">$40.00</span> /
+                  Daily
+                </h5>
+                <p class="card-text">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa
+                  ullam aut dolore, est et officiis sit? Nisi magnam aut,
+                  distinctio, molestiae odit incidunt assumenda eveniet
+                  architecto eos eum facere ducimus eaque sequi? Velit quibusdam
+                  necessitatibus iusto. Numquam, incidunt. Inventore ex repellat
+                  excepturi accusantium ullam repudiandae dolore eos quae hic
+                  libero!
+                </p>
+                <div class="row">
+                  <div class="col-6">
+                    <h6>----- Read More</h6>
+                  </div>
+                  <div class="col-6">
+                    <h6>*** Options Available</h6>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-3">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        fill="currentColor"
+                        class="bi bi-person-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+                        />
+                      </svg>
+                      5 Passenger
+                    </div>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        fill="currentColor"
+                        class="bi bi-briefcase-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5z"
+                        />
+                        <path
+                          d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85v5.65z"
+                        />
+                      </svg>
+                      2 Small Bags
+                    </div>
+                  </div>
+
+                  <div class="col-3">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        fill="currentColor"
+                        class="bi bi-thermometer-snow pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M5 12.5a1.5 1.5 0 1 1-2-1.415V9.5a.5.5 0 0 1 1 0v1.585A1.5 1.5 0 0 1 5 12.5z"
+                        />
+                        <path
+                          d="M1 2.5a2.5 2.5 0 0 1 5 0v7.55a3.5 3.5 0 1 1-5 0V2.5zM3.5 1A1.5 1.5 0 0 0 2 2.5v7.987l-.167.15a2.5 2.5 0 1 0 3.333 0L5 10.486V2.5A1.5 1.5 0 0 0 3.5 1zm5 1a.5.5 0 0 1 .5.5v1.293l.646-.647a.5.5 0 0 1 .708.708L9 5.207v1.927l1.669-.963.495-1.85a.5.5 0 1 1 .966.26l-.237.882 1.12-.646a.5.5 0 0 1 .5.866l-1.12.646.884.237a.5.5 0 1 1-.26.966l-1.848-.495L9.5 8l1.669.963 1.849-.495a.5.5 0 1 1 .258.966l-.883.237 1.12.646a.5.5 0 0 1-.5.866l-1.12-.646.237.883a.5.5 0 1 1-.966.258L10.67 9.83 9 8.866v1.927l1.354 1.353a.5.5 0 0 1-.708.708L9 12.207V13.5a.5.5 0 0 1-1 0v-11a.5.5 0 0 1 .5-.5z"
+                        />
+                      </svg>
+                      Air Condition
+                    </div>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        fill="currentColor"
+                        class="bi bi-diagram-3-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zm-6 8A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm6 0A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm6 0a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1z"
+                        />
+                      </svg>
+                      Automatic
+                    </div>
+                  </div>
+
+                  <div class="col-3 mt-2">
+                    <div class="form-check">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="35"
+                        height="35"
+                        fill="currentColor"
+                        class="bi bi-hdd-rack-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M2 2a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h1v2H2a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-1V7h1a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm.5 3a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm2 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm-2 7a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm2 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zM12 7v2H4V7h8z"
+                        />
+                      </svg>
+                      <input
+                        class="form-check-input mt-2 big-checkbox"
+                        type="checkbox"
+                        value="5"
+                        id="roofRack4"
+                      />
+                      <label class="form-check-label" for="roofRack4">
+                        RoofRack <strong>$5/day</strong>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="35"
+                        height="35"
+                        fill="currentColor"
+                        class="bi bi-bicycle pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M4 4.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1v.5h4.14l.386-1.158A.5.5 0 0 1 11 4h1a.5.5 0 0 1 0 1h-.64l-.311.935.807 1.29a3 3 0 1 1-.848.53l-.508-.812-2.076 3.322A.5.5 0 0 1 8 10.5H5.959a3 3 0 1 1-1.815-3.274L5 5.856V5h-.5a.5.5 0 0 1-.5-.5zm1.5 2.443-.508.814c.5.444.85 1.054.967 1.743h1.139L5.5 6.943zM8 9.057 9.598 6.5H6.402L8 9.057zM4.937 9.5a1.997 1.997 0 0 0-.487-.877l-.548.877h1.035zM3.603 8.092A2 2 0 1 0 4.937 10.5H3a.5.5 0 0 1-.424-.765l1.027-1.643zm7.947.53a2 2 0 1 0 .848-.53l1.026 1.643a.5.5 0 1 1-.848.53L11.55 8.623z"
+                        />
+                      </svg>
+                      <input
+                        class="form-check-input mt-2 big-checkbox"
+                        type="checkbox"
+                        value="5"
+                        id="bikeRack4"
+                      />
+                      <label class="form-check-label" for="bikeRack4">
+                        Bike Rack <strong>$5/day</strong>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col-3">
+                    <div class="form-check">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="35"
+                        height="35"
+                        fill="currentColor"
+                        class="bi bi-geo-alt-fill pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"
+                        />
+                      </svg>
+                      <input
+                        class="form-check-input mt-2 big-checkbox"
+                        type="checkbox"
+                        value="10"
+                        id="gps4"
+                      />
+                      <label class="form-check-label" for="gps4">
+                        GPS <strong>$10 flat</strong>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="35"
+                        height="35"
+                        fill="currentColor"
+                        class="bi bi-life-preserver pe-2 text-warning"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm6.43-5.228a7.025 7.025 0 0 1-3.658 3.658l-1.115-2.788a4.015 4.015 0 0 0 1.985-1.985l2.788 1.115zM5.228 14.43a7.025 7.025 0 0 1-3.658-3.658l2.788-1.115a4.015 4.015 0 0 0 1.985 1.985L5.228 14.43zm9.202-9.202-2.788 1.115a4.015 4.015 0 0 0-1.985-1.985l1.115-2.788a7.025 7.025 0 0 1 3.658 3.658zm-8.087-.87a4.015 4.015 0 0 0-1.985 1.985L1.57 5.228A7.025 7.025 0 0 1 5.228 1.57l1.115 2.788zM8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"
+                        />
+                      </svg>
+                      <input
+                        class="form-check-input mt-2 big-checkbox"
+                        type="checkbox"
+                        value=""
+                        id="child4"
+                      />
+                      <label class="form-check-label" for="child4">
+                        Child Seat <strong>Free</strong>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row align-items-end">
+                  <div>
+                    <h6>Rental Dates</h6>
+                  </div>
+                  <div class="col-4">
+                    <div class="mb-3">
+                      <label for="date" class="form-label">Arrive Date</label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="arriveDate4"
+                        aria-describedby="date"
+                        onchange="setDepartDate(this.value, 4)"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="mb-3">
+                      <label for="date" class="form-label"
+                        >Departure Date</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="departDate4"
+                        aria-describedby="date"
+                        onchange="activateButton(4)"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <button
+                      id="reserveButton4"
+                      type="button"
+                      class="btn btn-danger float-end"
+                      data-bs-toggle="modal"
+                      data-bs-target="#confirmationModal"
+                      onclick="reserve(4)"
+                      disabled
+                    >
+                      Reserve Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reservation Modal -->
+    <div
+      class="modal fade"
+      id="confirmationModal"
+      tabindex="-1"
+      aria-labelledby="confirmationModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div
+            class="modal-header text-center"
+            style="background-color: #ffc107"
+          >
+            <h4
+              class="modal-title w-100 text-white"
+              id="confirmationModalLabel"
+            >
+              CONFIRMATION
+            </h4>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div id="modal" class="modal-body p-0">
+            <div class="outer-modal">
+              <div class="inner-modal">
+                <div class="row btm-line align-items-center">
+                  <div class="col-4">
+                    <img
+                      src="./images/Logo-black.png"
+                      alt="Logo"
+                      class="navLogo"
+                    />
+                    <h6 class="text-center">Dodgy Brakes</h6>
+                  </div>
+                  <div class="col-8 text-end">
+                    Code
+                    <h4 class="text-warning">DBR-10254</h4>
+                  </div>
+                </div>
+                <div class="row btm-line align-items-center">
+                  <div
+                    id="typeOfCar"
+                    class="col text-center"
+                    style="width: 465.51px"
+                  ></div>
+                  <div class="col pe-0">
+                    <img id="modalImage" alt="compact" class="modal-pic" />
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <h5 class="blue-font">Pickup</h5>
+                    <p id="pickup"></p>
+                  </div>
+                  <div class="col">
+                    <h5 class="blue-font">Return</h5>
+                    <p id="returnTime">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Itaque dolorem tenetur odio tempore ex eveniet dolor,
+                      cumque dicta saepe ad.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="section2-modal">
+              <div class="row ps-3 pe-3 pt-3 border-bottom m-0">
+                <div class="col">
+                  <h4>Summary</h4>
+                  <p>Include Fees and Taxes</p>
+                </div>
+                <div class="col">
+                  <div id="modalTotal" class="d-flex justify-content-end"></div>
+                </div>
+              </div>
+              <div class="row p-3 border-bottom m-0">
+                <div id="customerInfo"></div>
+                <div class="row m-0 p-0">
+                  <div class="col">Credit Card Number</div>
+                  <div class="col">
+                    <div class="d-flex justify-content-end">
+                      **** **** **** 7688
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row p-3 border-bottom m-0">
+                <div class="col">
+                  <div>
+                    <h6>Daily Rate</h6>
+                    <h6>Total Rate</h6>
+                  </div>
+                </div>
+                <div id="modalRates" class="col"></div>
+              </div>
+              <div class="row p-3 m-0">
+                <h4 id="accessories" class="hide">Accessories</h4>
+              </div>
+              <div class="row ps-3 pe-3 pb-3 m-0">
+                <div class="col">
+                  <div>
+                    <h6 id="roofRack" class="hide">Roof Rack / Bike Rack</h6>
+                    <h6 id="gps" class="hide">GPS</h6>
+                    <h6 id="childSeat" class="hide">Child Seat</h6>
+                  </div>
+                </div>
+                <div class="col">
+                  <h6 id="roofRackPrice" class="text-end hide"></h6>
+                  <h6 id="gpsPrice" class="text-end hide">$10.00</h6>
+                  <h6 id="childSeatPrice" class="text-end hide">FREE</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              onclick="resetOptions()"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Reserve
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div
+            class="modal-header text-center"
+            style="background-color: #ffc107"
+          >
+            <h5 class="modal-title w-100" id="exampleModalLabel">
+              Reservation Complete
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-center">
+            <h2>Your Reservation Has Been Completed</h2>
+            <h4>Confirmation# 123456789</h4>
+            <p>A copy of your reservation has been sent to your email</p>
+            <h5>Thank you for Choosing Dodgy Brakes!</h5>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              onclick="homePage()"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-dark text-center text-white pt-3">
+      <div class="container p-4">
+        <div class="mb-4">
+          <div class="row justify-content-center">
+            <div class="col-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="currentColor"
+                class="bi bi-facebook"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"
+                />
+              </svg>
+            </div>
+            <div class="col-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="currentColor"
+                class="bi bi-twitter"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"
+                />
+              </svg>
+            </div>
+            <div class="col-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="currentColor"
+                class="bi bi-google"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"
+                />
+              </svg>
+            </div>
+            <div class="col-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="currentColor"
+                class="bi bi-instagram"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"
+                />
+              </svg>
+            </div>
+            <div class="col-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="currentColor"
+                class="bi bi-linkedin"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"
+                />
+              </svg>
+            </div>
+            <div class="col-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="currentColor"
+                class="bi bi-youtube"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="">
+          <form action="">
+            <div class="row d-flex justify-content-center">
+              <div class="col-auto">
+                <p class="pt-2">
+                  <strong>Sign up for our newsletter</strong>
+                </p>
+              </div>
+              <div class="col-md-5 col-12">
+                <div class="form-outline form-white mb-4">
+                  <input type="email" id="" class="form-control" />
+                  <label class="form-label" for="">Email address</label>
+                </div>
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-outline-light mb-4">
+                  Subscribe
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-6 text-start ms-5">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
+              distinctio earum repellat quaerat voluptatibus placeat nam,
+              commodi optio pariatur est quia magnam eum harum corrupti dicta,
+              aliquam sequi voluptate quas. Lorem ipsum dolor sit amet
+              consectetur adipisicing elit. Consequatur autem quo laboriosam
+              assumenda, iure reprehenderit ex. Repellat nulla libero, nihil
+              distinctio accusamus nostrum rerum quidem voluptates, accusantium
+              illo eligendi quaerat?
+            </p>
+          </div>
+          <div class="col-4 text-start ms-5">
+            <h4>Address:</h4>
+            <p>123 SAIT AVE NE, Calgary, AB, T9T9T9</p>
+            <h4>phone:</h4>
+            <p>403-111-2222</p>
+          </div>
+        </div>
+      </div>
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        © 2021 Copyright:
+      </div>
+    </footer>
+
+    <script type="text/javascript">
+      var clockElement = document.getElementById("clock");
+      function clock() {
+        clockElement.textContent = new Date().toString().substring(0, 25);
+      }
+      setInterval(clock, 1000);
+    </script>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
